@@ -7,6 +7,8 @@ import ExpoTHREE from 'expo-three';
 import {Camera} from 'expo'
 
 import { StackNavigator } from 'react-navigation';
+import './ReactotronConfig';
+import Reactotron from 'reactotron-react-native'
 
 import RNShakeEventIOS from 'react-native-shake-event-ios';
 
@@ -16,14 +18,17 @@ export default class AugmentedScreen extends React.Component {
     this.rotation = 'forward';
     this.state={
       hasCameraPermission: null,
+      selectedItem: null,
       type: Camera.Constants.Type.back,
     }
   }
 
   componentWillMount() {
+    Reactotron.log(this.props.navigation.state.params.selectedItem)
+    this.setState({selectedItem: this.props.navigation.state.params.selectedItem})
     RNShakeEventIOS.addEventListener('shake', () => {
       Reactotron.log("SHAKKKKEEEEEEE");
-      () => (this.props.navigation.navigate('AugmentedScreen'))
+      () => (this.props.navigation.navigate('AugmentedScreen'),{selectedItem: this.props.navigation.state.params.selectedItem})
     });
   }
 

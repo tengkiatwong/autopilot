@@ -13,6 +13,8 @@ export default class MapScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state={
+      categories: null,
+      fishes: null,
       isReady: false,
       latitude: 0,
       longitude: 0,
@@ -38,7 +40,7 @@ export default class MapScreen extends React.Component {
   'You are right by a pond!',
   'Are you ready?',
   [
-    {text: 'Lets go!', onPress: () => (this.props.navigation.navigate('AugmentedScreen'))},
+    {text: 'Lets go!', onPress: () => (this.props.navigation.navigate('AugmentedScreen'),{selectedItem: this.state.shops})},
 
   ],
   { cancelable: false }
@@ -78,6 +80,30 @@ export default class MapScreen extends React.Component {
    });
 
    this.setState({ isReady: true });
+   this.setState({categories: this.props.navigation.state.params.categories})
+
+   fetch('http://f1915ff1.ngrok.io/fishes')
+     .then((response) => response.json())
+     .then((responseJson) => {
+       this.setState({
+         fishes: responseJson
+       }, function() {
+
+       });
+       var myshops = [];
+       var dataSet = responseJson.fishes
+       for(var fishIndex in dataSet) {
+         if(dataSet[fishIndex].category === "restaurant")
+          myshops.push(dataSet[fishIndex])
+       }
+       Reactotron.log(myshops)
+       this.setState({shops:myshops})
+     })
+     .catch((error) => {
+       console.error(error);
+     });
+
+
   }
 
   componentDidMount() {
