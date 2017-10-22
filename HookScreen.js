@@ -46,13 +46,13 @@ export default class HookScreen extends React.Component {
           <DeckSwiper
             dataSource={cards}
             renderItem={item =>
-              <Card style={{ elevation: 3 }}>
+              <Card style={{ elevation: 3, padding: 20, alignItems: 'center' }}>
                 <CardItem cardBody>
                   <Left>
-                    <Body>
-                      <Text>Dining</Text>
-                      <Image style={{ height: 300, alignItems:'center' }} source={require('./img/hook1.png')} />
-                      <Text note>Fish hook to catch amazing dining deals</Text>
+                    <Body style={{ alignItems: 'center' }}>
+                      <Text style={{ color: 'black',fontSize: 50, marginBottom: 20}}>DINING</Text>
+                      <Image style={{ height: 200, alignItems:'center' }} source={require('./img/hook1.png')} />
+                      <Text note style={{ color: 'black',fontSize: 25, marginBottom: 20}}>Fish hook to catch amazing dining deals</Text>
                     </Body>
                   </Left>
                 </CardItem>

@@ -58,23 +58,9 @@ export default class MapScreen extends React.Component {
   'Are you ready?',
   [
     {text: 'Lets go!', onPress: () => (this.props.navigation.navigate('AugmentedScreen'),{selectedItem: {
-<<<<<<< HEAD
-      "category": "restaurant",
-      "code": "OuGYo7jlMH19",
-      "description": "Casual Italian Joint with Pizza and Pasta",
-      "latlng": {
-        "latitude": 36.121941,
-        "longitude": -115.168359
-      },
-      "offerBarcode": 4054764834,
-      "offerDescription": "Thank you for shopping with us regularly, 30% off your purchase of $100 or more today",
-      "price": 45,
-      "title": "Trattoria Reggiano"
-=======
       title: "Ruth's Chris Steak House",
       code: "PlZ73aMeL3",
       description: "Thank you for shopping with us regularly, 30% off your purchase of $100 or more today",
->>>>>>> 7bfc066aac96b88759db8532c6dbdba5432e4d62
     }})},
 
   ],
