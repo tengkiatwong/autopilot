@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   },
   fishCollection: {
 
-  }
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
