@@ -21,7 +21,7 @@ const cards = [
 export default class HookScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state= {categories: ''}
+    this.state= {categories: null}
   }
   componentDidMount() {
     return fetch('http://f1915ff1.ngrok.io/categories')
@@ -29,7 +29,7 @@ export default class HookScreen extends React.Component {
       .then((responseJson) => {
         console.log('TESTT DATA' , responseJson)
         this.setState({
-          categories  : responseJson
+          categories  : responseJson.categories
         }, function() {
           // Reactotron.tron(responseJson)
         });
@@ -40,31 +40,48 @@ export default class HookScreen extends React.Component {
   }
 
   render() {
+    if (!this.state.categories) return null
+    const categories = this.state.categories;
+    console.log("CATG", categories);
     return (
       <Container style={{marginHorizontal: 10}}>
-        <View >
-          <DeckSwiper
-            dataSource={cards}
-            renderItem={item =>
-              <Card style={{ elevation: 3, padding: 20, alignItems: 'center' }}>
-                <CardItem cardBody>
-                  <Left>
-                    <Body style={{ alignItems: 'center' }}>
-                      <Text style={{ color: 'black',fontSize: 50, marginBottom: 20}}>DINING</Text>
-                      <Image style={{ height: 200, alignItems:'center' }} source={require('./img/hook1.png')} />
-                      <Text note style={{ color: 'black',fontSize: 25, marginBottom: 20}}>Fish hook to catch amazing dining deals</Text>
+        <View style={{marginTop: 60}}>
+        <DeckSwiper
+          dataSource={categories.slice(categories.length-4,categories.length)}
+          renderItem= {(item,idx) => {
+            switch (item.categoryName) {
+              case 'Bill Pay':
+                categoryImage = require('./img/bank.png');
+                break;
+              case 'Pets':
+                categoryImage = require('./img/pets.png');
+                break;
+              case 'Travel':
+                categoryImage = require('./img/travelling.png');
+                break;
+              case 'Restaurants':
+                categoryImage = require('./img/dining.png');
+                break;
+            }
+            return (
+              <Card style={{ elevation: 3, paddingVertical: 10, padding: 20, alignItems: 'center' }} key={idx}>
+                <CardItem cardBody style={{ alignItems: 'center'}}>
+                    <Body>
+                      <Text style={{ fontSize: 35, margin: 10 }}>{item.categoryName}</Text>
+                      <Image style = {{ width: 300, height: 250 }} source={categoryImage} />
+                      <Text note style={{ margin: 20, fontSize: 20 }}>Fish hook to catch amazing deals for {item.categoryName}.</Text>
                     </Body>
-                  </Left>
                 </CardItem>
-                <Button large
+                <Button large style={{ marginLeft: 70, marginBottom: 20, backgroundColor: '#f44336'}}
                   onPress = {() => this.props.navigation.navigate('MapScreen',{categories: this.state.categories})}
                 >
-                  <Text>Start Fishing!</Text>
-                </Button>
+                <Text>Start Fishing!</Text>
+              </Button>
               </Card>
-
-            }
-          />
+            );
+          }
+          }
+        />
         </View>
       </Container>
     );

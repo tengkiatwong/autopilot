@@ -20,7 +20,7 @@ export default class MapScreen extends React.Component {
       latitude: 0,
       longitude: 0,
       modalVisible: false,
-      message: "You're a little too far from a pond",
+      message: "Move closer to the pond...",
       shops: [
         {
           title:"Carlo's bake shop",
@@ -160,14 +160,16 @@ export default class MapScreen extends React.Component {
                   title={shop.title}
                   description={shop.description}
                   key={shop.title}
-                />
+                  image={require('./img/smallpondnew.png')}
+                >
+                </MapView.Marker>
               ))}
              </MapView>
           </View>
-          <View style={{backgroundColor:"white"}}>
-            <Text style={styles.fishText}>In your area</Text>
+          <View style={{backgroundColor:"black", padding: 10}}>
+            <Text style={styles.fishText}>Fishes in your area</Text>
             <View style={{flexDirection:'row'}}>
-              <Image style={styles.fishIcon} source={require('./img/2.jpeg')} />
+              <Image style={styles.fishIcon} source={require('./img/newfish.png')} />
               <Image style={styles.fishIcon} source={require('./img/3.png')} />
               <Image style={styles.fishIcon2} source={require('./img/5.png')} />
               <Image style={styles.fishIcon1} source={require('./img/4.png')} />
@@ -212,18 +214,24 @@ const styles = StyleSheet.create({
   },
   fishIcon: {
     height:40,
-    width:60
+    width:60,
+    marginRight: 10
   },
   fishIcon1: {
-    height:40,
-    width:75
+    height:30,
+    width:60,
+    marginRight: 10
   },
   fishIcon2: {
-    height:40,
-    width:80
+    height:30,
+    width:60,
+    marginRight: 10
   },
   fishText: {
     paddingLeft: 10,
-    fontSize: 20
+    fontSize: 18,
+    paddingTop:5,
+    paddingBottom: 10,
+    color: 'white'
   }
 });
