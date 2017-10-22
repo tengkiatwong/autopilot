@@ -57,7 +57,19 @@ export default class MapScreen extends React.Component {
   'You are right by a pond!',
   'Are you ready?',
   [
-    {text: 'Lets go!', onPress: () => (this.props.navigation.navigate('AugmentedScreen'),{selectedItem: this.state.shops[3]})},
+    {text: 'Lets go!', onPress: () => (this.props.navigation.navigate('AugmentedScreen'),{selectedItem: {
+      "category": "restaurant",
+      "code": "OuGYo7jlMH19",
+      "description": "Casual Italian Joint with Pizza and Pasta",
+      "latlng": {
+        "latitude": 36.121941,
+        "longitude": -115.168359
+      },
+      "offerBarcode": 4054764834,
+      "offerDescription": "Thank you for shopping with us regularly, 30% off your purchase of $100 or more today",
+      "price": 45,
+      "title": "Trattoria Reggiano"
+    }})},
 
   ],
   { cancelable: false }

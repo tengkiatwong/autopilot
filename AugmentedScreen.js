@@ -24,8 +24,8 @@ export default class AugmentedScreen extends React.Component {
   }
 
   componentWillMount() {
-    Reactotron.log(this.props.navigation.state.params.selectedItem)
-    this.setState({selectedItem: this.props.navigation.state.params.selectedItem})
+    //Reactotron.log(this.props.navigation.state.params.selectedItem)
+    //this.setState({selectedItem: this.props.navigation.state.params.selectedItem})
     RNShakeEventIOS.addEventListener('shake', () => {
       Reactotron.log("SHAKKKKEEEEEEE");
     })
