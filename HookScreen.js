@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Button, View, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Icon } from 'native-base';
 import { Image } from 'react-native'
 import { StackNavigator } from 'react-navigation';
+
 const cards = [
   {
     text: 'Card One',
@@ -30,6 +31,7 @@ export default class HookScreen extends React.Component {
         this.setState({
           categories  : responseJson
         }, function() {
+          // Reactotron.tron(responseJson)
         });
       })
       .catch((error) => {
