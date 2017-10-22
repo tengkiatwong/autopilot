@@ -6,6 +6,8 @@ import * as THREE from 'three';
 import ExpoTHREE from 'expo-three';
 import {Camera} from 'expo'
 
+import { StackNavigator } from 'react-navigation';
+
 import RNShakeEventIOS from 'react-native-shake-event-ios';
 
 export default class AugmentedScreen extends React.Component {
@@ -17,9 +19,19 @@ export default class AugmentedScreen extends React.Component {
       type: Camera.Constants.Type.back,
     }
   }
+
+  componentWillMount() {
+    RNShakeEventIOS.addEventListener('shake', () => {
+      Reactotron.log("SHAKKKKEEEEEEE");
+      () => (this.props.navigation.navigate('AugmentedScreen'))
+    });
+  }
+
+  componentWillUnmount() {
+    RNShakeEventIOS.removeEventListener('shake');
+  }
+
   render() {
-    // Create an Expo.GLView covering the whole screen, tell it to call our
-    // _onGLContextCreate function once it's initialized.
     return (
       <Expo.GLView
         ref={(ref) => this._glView = ref
@@ -30,10 +42,6 @@ export default class AugmentedScreen extends React.Component {
     );
   }
 
-  //async componentWillMount() {
-  //  const { status } = await Permissions.askAsync(Permissions.CAMERA);
-  //  this.setState({ hasCameraPermission: status === 'granted' });
-  //}
 
   getRotation (y) {
     if (y >= 0.40 && this.rotation == 'forward')

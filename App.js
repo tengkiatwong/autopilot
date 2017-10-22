@@ -5,6 +5,7 @@ import { StackNavigator } from 'react-navigation';
 
 import MapScreen from './MapScreen.js';
 import AugmentedScreen from './AugmentedScreen.js';
+import WinScreen from './WinScreen.js';
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
