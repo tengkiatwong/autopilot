@@ -3,7 +3,8 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { location } from 'expo';
 import { StackNavigator } from 'react-navigation';
 
-import MapScreen from './MapScreen.js'
+import MapScreen from './MapScreen.js';
+import AugmentedScreen from './AugmentedScreen.js';
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -34,6 +35,7 @@ class HomeScreen extends React.Component {
 const AutoPilot = StackNavigator({
   Home: { screen: HomeScreen },
   MapScreen: { screen: MapScreen},
+  AugmentedScreen: {screen: AugmentedScreen}
 });
 
 export default class App extends React.Component {
