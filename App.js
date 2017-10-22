@@ -7,7 +7,9 @@ import { Body, Title, Left, Right, Segment } from 'native-base';
 import MapScreen from './MapScreen.js'
 import HookScreen from './HookScreen.js'
 import Header from './components/Header.js'
- 
+import AugmentedScreen from './AugmentedScreen.js';
+import WinScreen from './WinScreen.js';
+
 class HomeScreen extends React.Component {
   constuctor(props) {
     this.state = { isReady: false }
@@ -44,6 +46,7 @@ class HomeScreen extends React.Component {
 const AutoPilot = StackNavigator({
   Home: { screen: HomeScreen },
   MapScreen: { screen: MapScreen},
+  AugmentedScreen: {screen: AugmentedScreen}
 });
 
 export default class App extends React.Component {

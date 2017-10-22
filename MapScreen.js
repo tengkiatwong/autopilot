@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image,Modal,TouchableHighlight, Alert } from 'react-native';
 import { location } from 'expo';
 import { StackNavigator } from 'react-navigation';
 import { MapView , Location, Permisions } from 'expo';
@@ -16,6 +16,8 @@ export default class MapScreen extends React.Component {
       isReady: false,
       latitude: 0,
       longitude: 0,
+      modalVisible: false,
+      message: "You're a little too far from a pond",
       shops: [
         {
           title:"Carlo's bake shop",
@@ -29,6 +31,25 @@ export default class MapScreen extends React.Component {
         }
       ]
     }
+  }
+  setModalVisible(visible) {
+    // this.setState({modalVisible: visible});
+    Alert.alert(
+  'You are right by a pond!',
+  'Are you ready?',
+  [
+    {text: 'Lets go!', onPress: () => (this.props.navigation.navigate('AugmentedScreen'))},
+
+  ],
+  { cancelable: false }
+)
+    navigator.geolocation.clearWatch();
+    this.setState({
+      latitude: 36.1230297,
+      longitude: -115.1723804,
+      error: null,
+    });
+    this.setState({message:"You're here!"})
   }
   static navigationOptions = {
     header: null
@@ -50,7 +71,7 @@ export default class MapScreen extends React.Component {
   }
 
   async componentWillMount() {
-    await Expo.Font.loadAsync({
+    Expo.Font.loadAsync({
      Roboto: require("native-base/Fonts/Roboto.ttf"),
      Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
      Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf")
@@ -63,17 +84,16 @@ export default class MapScreen extends React.Component {
     this.getCurrPosition();
   }
 
+
   render() {
     const shops = this.state.shops;
     if (this.state.isReady === true ) {
       return (
-        <div>
+        <Container>
           <Header>
-            <Left/>
             <Body>
-              <Title>You are a little far from a pond</Title>
+              <Title>{this.state.message}</Title>
             </Body>
-            <Right/>
           </Header>
           <View style={styles.container}>
             <MapView
@@ -97,7 +117,36 @@ export default class MapScreen extends React.Component {
               ))}
              </MapView>
           </View>
-        </div>
+          <View style={{backgroundColor:"white"}}>
+            <Text style={styles.fishText}>In your area</Text>
+            <View style={{flexDirection:'row'}}>
+              <Image style={styles.fishIcon} source={require('./img/2.jpeg')} />
+              <Image style={styles.fishIcon} source={require('./img/3.png')} />
+              <Image style={styles.fishIcon2} source={require('./img/5.png')} />
+              <Image style={styles.fishIcon1} source={require('./img/4.png')} />
+              <TouchableOpacity style={styles.goButton} onPress={() => this.setModalVisible(true)}><Text>Go To</Text></TouchableOpacity>
+            </View>
+          </View>
+          <Modal
+          animationType="slide"
+          transparent={false}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {alert("Modal has been closed.")}}
+          >
+         <View style={{marginTop: 22}}>
+          <View>
+            <Text>Hello World!</Text>
+
+            <TouchableHighlight onPress={() => {
+              this.setModalVisible(!this.state.modalVisible)
+            }}>
+              <Text>Hide Modal</Text>
+            </TouchableHighlight>
+
+          </View>
+         </View>
+        </Modal>
+        </Container>
       )
     }
     else {
@@ -107,9 +156,27 @@ export default class MapScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  goButton: {
+    alignItems: 'center',
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    // justifyContent: 'center'
   },
+  fishIcon: {
+    height:40,
+    width:60
+  },
+  fishIcon1: {
+    height:40,
+    width:75
+  },
+  fishIcon2: {
+    height:40,
+    width:80
+  },
+  fishText: {
+    paddingLeft: 10,
+    fontSize: 20
+  }
 });

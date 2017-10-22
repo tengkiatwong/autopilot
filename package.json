@@ -21,10 +21,13 @@
   },
   "dependencies": {
     "expo": "^21.0.0",
+    "expo-three": "^2.0.2",
     "native-base": "^2.3.3",
     "react": "16.0.0-alpha.12",
     "react-native": "^0.48.4",
     "react-native-maps": "^0.17.1",
-    "react-navigation": "^1.0.0-beta.15"
+    "react-native-shake-event-ios": "^1.0.3",
+    "react-navigation": "^1.0.0-beta.15",
+    "three": "^0.87.1"
   }
 }

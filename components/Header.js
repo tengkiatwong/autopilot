@@ -27,7 +27,7 @@ const styles = {
 
     },
     HeaderTextStyle: {
-        fontWeight: 'thin',
+        fontWeight: '100',
         fontSize: 30,
         color: '#FFFFFF',
         marginHorizontal: 30

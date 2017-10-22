@@ -21,22 +21,37 @@ export default class HookScreen extends React.Component {
             dataSource={cards}
             renderItem={item =>
               <Card style={{ elevation: 3 }}>
-                <CardItem>
-                  <Left>
-                
+
+                <CardItem cardBody>
+                  <Left>  
                     <Body>
-                      <Text>TEST</Text>
-                      <Text note>NativeBase</Text>
+                      <Text>Dining</Text>
+                      <Image style={{ height: 300, flex: 1 }} source={'./img/hook1'} />
+                      <Text note>Fish hook to catch amazing dining deals</Text>
                     </Body>
                   </Left>
                 </CardItem>
+
                 <CardItem cardBody>
-                 
+                  <Left>  
+                    <Body>
+                      <Text>Sportswear</Text>
+                      <Image style={{ height: 300, flex: 1 }} source={'./img/hook2'} />
+                      <Text note>Fish hook to catch amazing dining deals</Text>
+                    </Body>
+                  </Left>
                 </CardItem>
-                <CardItem>
-                  <Icon name="heart" style={{ color: '#ED4A6A' }} />
-                  <Text>TEST</Text>
+
+                <CardItem cardBody>
+                  <Left>  
+                    <Body>
+                      <Text>Formal Apparel</Text>
+                      <Image style={{ height: 300, flex: 1 }} source={'./img/hook3'} />
+                      <Text note>Fish hook to catch amazing dining deals</Text>
+                    </Body>
+                  </Left>
                 </CardItem>
+
               </Card>
             }
           />
