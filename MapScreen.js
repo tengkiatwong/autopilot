@@ -16,6 +16,7 @@ export default class MapScreen extends React.Component {
       categories: null,
       fishes: null,
       isReady: false,
+      shops: {},
       latitude: 0,
       longitude: 0,
       modalVisible: false,
@@ -34,13 +35,29 @@ export default class MapScreen extends React.Component {
       ]
     }
   }
+
+  componentDidMount() {
+    return fetch('http://f1915ff1.ngrok.io/fishes')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log('TESTT DATA MAP' , responseJson);
+        this.setState({
+          shops: responseJson
+        }, function() {
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   setModalVisible(visible) {
     // this.setState({modalVisible: visible});
     Alert.alert(
   'You are right by a pond!',
   'Are you ready?',
   [
-    {text: 'Lets go!', onPress: () => (this.props.navigation.navigate('AugmentedScreen'),{selectedItem: this.state.shops})},
+    {text: 'Lets go!', onPress: () => (this.props.navigation.navigate('AugmentedScreen'),{selectedItem: this.state.shops[3]})},
 
   ],
   { cancelable: false }

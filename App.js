@@ -52,9 +52,9 @@ class HomeScreen extends React.Component {
     if (this.state && this.state.isReady === true ) {
       return (
         <View>
-          <Header headerText="FishPond for Synchrony" bottomText="Choose your prefered deals and start fishing now!"/>
+          <Header headerText="FishPon for Synchrony" bottomText="Choose your prefered deals and start fishing now!"/>
           <HookScreen/>
-        </View>  
+        </View>
       );
     }
     else {
@@ -64,7 +64,7 @@ class HomeScreen extends React.Component {
 }
 
 const AutoPilot = StackNavigator({
-  Home: { screen: HomeScreen },
+  HookScreen: {screen: HookScreen},
   MapScreen: { screen: MapScreen},
   AugmentedScreen: {screen: AugmentedScreen}
 });
@@ -74,7 +74,7 @@ export default class App extends React.Component {
     return <AutoPilot />;
   }
 }
- 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
