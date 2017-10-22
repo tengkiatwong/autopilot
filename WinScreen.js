@@ -13,11 +13,11 @@ export default class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      selectedItem: null,
       item: {
-        title: "Carlo's Bake Shop",
-        code: "7TVXQ",
-        coupon: "20%",
-        couponCategory: "All Doughnuts"
+        title: "Ruth's Chris Steak House",
+        code: "PlZ73aMeL3",
+        description: "Thank you for shopping with us regularly, 30% off your purchase of $100 or more today",
       }
     }
   }
