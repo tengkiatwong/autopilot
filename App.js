@@ -13,10 +13,10 @@ class HomeScreen extends React.Component {
           <Text style={styles.headerText}>What are you looking for today?</Text>
         </View>
         <View style={styles.card}>
-          <Text style={styles.cardText}>Sportswear</Text>
+          <Text style={styles.cardText}>Dining</Text>
         </View>
         <View style={styles.card}>
-          <Text style={styles.cardText}>Dining</Text>
+          <Text style={styles.cardText}>SportsWear</Text>
         </View>
         <View style={styles.card}>
           <Text style={styles.cardText}>Groceries</Text>
@@ -56,6 +56,8 @@ const styles = StyleSheet.create({
     flex: 1,
     width: 360,
     borderWidth: 0.5,
-    borderColor: '#d6d7da'
+    borderColor: '#d6d7da',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });
