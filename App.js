@@ -10,6 +10,9 @@ import Header from './components/Header.js'
 import AugmentedScreen from './AugmentedScreen.js';
 import WinScreen from './WinScreen.js';
 
+import './ReactotronConfig';
+import Reactotron from 'reactotron-react-native'
+
 class HomeScreen extends React.Component {
   constuctor(props) {
     this.state = { isReady: false }
@@ -26,13 +29,30 @@ class HomeScreen extends React.Component {
   }
 
   static navigationOptions = {
-    header: null
+    header: null,
+    categories:null
   };
+
+  componentDidMount() {
+    return fetch('http://f1915ff1.ngrok.io/categories')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        Reactotron.log(responseJson)
+        this.setState({
+          categories: responseJson
+        }, function() {
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   render() {
     if (this.state && this.state.isReady === true ) {
       return (
         <View>
-           <Header headerText="FishPond for Synchrony" bottomText="Choose your prefered deals and start fishing now!"/>
+          <Header headerText="FishPond for Synchrony" bottomText="Choose your prefered deals and start fishing now!"/>
           <HookScreen/>
         </View>  
       );
