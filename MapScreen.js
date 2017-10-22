@@ -50,7 +50,7 @@ export default class MapScreen extends React.Component {
   }
 
   async componentWillMount() {
-    Expo.Font.loadAsync({
+    await Expo.Font.loadAsync({
      Roboto: require("native-base/Fonts/Roboto.ttf"),
      Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
      Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf")
@@ -67,11 +67,13 @@ export default class MapScreen extends React.Component {
     const shops = this.state.shops;
     if (this.state.isReady === true ) {
       return (
-        <Container>
+        <div>
           <Header>
+            <Left/>
             <Body>
               <Title>You are a little far from a pond</Title>
             </Body>
+            <Right/>
           </Header>
           <View style={styles.container}>
             <MapView
@@ -95,10 +97,7 @@ export default class MapScreen extends React.Component {
               ))}
              </MapView>
           </View>
-          <View>
-            <Text>Testing Text</Text>
-          </View>
-        </Container>
+        </div>
       )
     }
     else {
