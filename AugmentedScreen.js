@@ -20,12 +20,16 @@ export default class AugmentedScreen extends React.Component {
       hasCameraPermission: null,
       selectedItem: null,
       type: Camera.Constants.Type.back,
+      selectedItem: {
+        title: "Ruth's Chris Steak House",
+        code: "PlZ73aMeL3",
+        description: "Thank you for shopping with us regularly, 30% off your purchase of $100 or more today",
+      }
     }
+    // Reactotron.log(this.props.navigation.state.params)
   }
 
   componentWillMount() {
-    Reactotron.log(this.props.navigation.state.params.selectedItem)
-    this.setState({selectedItem: this.props.navigation.state.params.selectedItem})
     RNShakeEventIOS.addEventListener('shake', () => {
       Reactotron.log("SHAKKKKEEEEEEE");
     })

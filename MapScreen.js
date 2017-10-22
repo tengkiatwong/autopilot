@@ -57,7 +57,11 @@ export default class MapScreen extends React.Component {
   'You are right by a pond!',
   'Are you ready?',
   [
-    {text: 'Lets go!', onPress: () => (this.props.navigation.navigate('AugmentedScreen'),{selectedItem: this.state.shops[3]})},
+    {text: 'Lets go!', onPress: () => (this.props.navigation.navigate('AugmentedScreen'),{selectedItem: {
+      title: "Ruth's Chris Steak House",
+      code: "PlZ73aMeL3",
+      description: "Thank you for shopping with us regularly, 30% off your purchase of $100 or more today",
+    }})},
 
   ],
   { cancelable: false }
