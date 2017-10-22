@@ -7,10 +7,30 @@ import MapScreen from './MapScreen.js';
 import AugmentedScreen from './AugmentedScreen.js';
 import WinScreen from './WinScreen.js';
 
+import './ReactotronConfig';
+import Reactotron from 'reactotron-react-native'
+
 class HomeScreen extends React.Component {
   static navigationOptions = {
-    header: null
+    header: null,
+    categories:null
   };
+
+  componentDidMount() {
+    return fetch('http://f1915ff1.ngrok.io/categories')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        Reactotron.log(responseJson)
+        this.setState({
+          categories: responseJson
+        }, function() {
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   render() {
     return (<View style={styles.container}>
         <View>
@@ -19,7 +39,7 @@ class HomeScreen extends React.Component {
         <TouchableOpacity style={styles.card}>
           <Text style={styles.cardText}>Dining</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.card} onPress={() => this.props.navigation.navigate("MapScreen")}>
+        <TouchableOpacity style={styles.card} onPress={() => this.props.navigation.navigate("MapScreen",{categories: this.state.categories})}>
           <Text style={styles.cardText}>SportsWear</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.card}>
