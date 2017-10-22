@@ -2,8 +2,11 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { location } from 'expo';
 import { StackNavigator } from 'react-navigation';
+import { Body, Title, Left, Right, Segment } from 'native-base';
 
-import MapScreen from './MapScreen.js';
+import MapScreen from './MapScreen.js'
+import HookScreen from './HookScreen.js'
+import Header from './components/Header.js'
 import AugmentedScreen from './AugmentedScreen.js';
 import WinScreen from './WinScreen.js';
 
@@ -11,6 +14,20 @@ import './ReactotronConfig';
 import Reactotron from 'reactotron-react-native'
 
 class HomeScreen extends React.Component {
+  constuctor(props) {
+    this.state = { isReady: false }
+  }
+
+  async componentWillMount() {
+    await Expo.Font.loadAsync({
+     Roboto: require("native-base/Fonts/Roboto.ttf"),
+     Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
+     Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf")
+   });
+
+   this.setState({ isReady: true });
+  }
+
   static navigationOptions = {
     header: null,
     categories:null
@@ -32,24 +49,17 @@ class HomeScreen extends React.Component {
   }
 
   render() {
-    return (<View style={styles.container}>
+    if (this.state && this.state.isReady === true ) {
+      return (
         <View>
-          <Text style={styles.headerText}>What are you looking for today?</Text>
-        </View>
-        <TouchableOpacity style={styles.card}>
-          <Text style={styles.cardText}>Dining</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.card} onPress={() => this.props.navigation.navigate("MapScreen",{categories: this.state.categories})}>
-          <Text style={styles.cardText}>SportsWear</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.card}>
-          <Text style={styles.cardText}>Groceries</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.card}>
-          <Text style={styles.cardText}>Watches</Text>
-        </TouchableOpacity>
-
-      </View>);
+          <Header headerText="FishPond for Synchrony" bottomText="Choose your prefered deals and start fishing now!"/>
+          <HookScreen/>
+        </View>  
+      );
+    }
+    else {
+      return null;
+    }
   }
 }
 
@@ -64,12 +74,14 @@ export default class App extends React.Component {
     return <AutoPilot />;
   }
 }
-
+ 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
+    width: '100%',
+    height: 20
     // justifyContent: 'center'
   },
   headerText: {
