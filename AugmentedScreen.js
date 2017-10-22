@@ -1,6 +1,6 @@
 import Expo from 'expo';
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 
 import * as THREE from 'three';
 import ExpoTHREE from 'expo-three';
@@ -10,7 +10,8 @@ import { StackNavigator } from 'react-navigation';
 import './ReactotronConfig';
 import Reactotron from 'reactotron-react-native'
 
-import RNShakeEventIOS from 'react-native-shake-event-ios';
+import RNShakeEvent from 'react-native-shake-event';
+import TimerMixin from 'react-timer-mixin';
 
 export default class AugmentedScreen extends React.Component {
   constructor(props) {
@@ -24,14 +25,25 @@ export default class AugmentedScreen extends React.Component {
   }
 
   componentWillMount() {
-    RNShakeEventIOS.addEventListener('shake', () => {
-      Reactotron.log("SHAKKKKEEEEEEE");
+    let obj = this;
+    setTimeout(
+      () => { this.props.navigation.navigate('WinScreen')},
+      1000
+    );
+
+    RNShakeEvent.addEventListener('shake', () => {
+      console.log("SHAKKKKEEEEEEE");
       this.props.navigation.navigator('WinScreen');
     })
   }
 
   componentWillUnmount() {
-    RNShakeEventIOS.removeEventListener('shake');
+    RNShakeEvent.removeEventListener('shake');
+  }
+
+  changeToWin() {
+    Reactotron.log("NABIIAGTEEDD");
+    this.props.navigation.navigate('WinScreen');
   }
 
   render() {
