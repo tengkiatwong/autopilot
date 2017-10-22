@@ -21,7 +21,7 @@ const cards = [
 export default class HookScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state= {categories: ''}
+    this.state= {categories: null}
   }
   componentDidMount() {
     return fetch('http://f1915ff1.ngrok.io/categories')
@@ -29,7 +29,7 @@ export default class HookScreen extends React.Component {
       .then((responseJson) => {
         console.log('TESTT DATA' , responseJson)
         this.setState({
-          categories  : responseJson
+          categories  : responseJson.categories
         }, function() {
           // Reactotron.tron(responseJson)
         });
@@ -40,31 +40,33 @@ export default class HookScreen extends React.Component {
   }
 
   render() {
+    if (!this.state.categories) return null
+    const categories = this.state.categories;
+    console.log("CATG", categories)
     return (
       <Container style={{marginHorizontal: 10}}>
         <View >
-          <DeckSwiper
-            dataSource={cards}
-            renderItem={item =>
-              <Card style={{ elevation: 3 }}>
-                <CardItem cardBody>
-                  <Left>
-                    <Body>
-                      <Text>Dining</Text>
-                      <Image style={{ height: 300, alignItems:'center' }} source={require('./img/hook1.png')} />
-                      <Text note>Fish hook to catch amazing dining deals</Text>
-                    </Body>
-                  </Left>
-                </CardItem>
-                <Button large
-                  onPress = {() => this.props.navigation.navigate('MapScreen',{categories: this.state.categories})}
-                >
-                  <Text>Start Fishing!</Text>
-                </Button>
-              </Card>
-
-            }
-          />
+        <DeckSwiper
+          dataSource={categories.slice(categories.length-4,categories.length)}
+          renderItem= {(item,idx) =>
+            <Card style={{ elevation: 3, paddingVertical: 10 }} key={idx}>
+              <CardItem cardBody>
+                <Left>
+                  <Body>
+                    <Text>{item.categoryName}</Text>
+                    <Image style={{ height: 300, alignItems:'center' }} source={require('./img/hook1.png')} />
+                    <Text note>Fish hook to catch amazing deals for {item.categoryName}.</Text>
+                  </Body>
+                </Left>
+              </CardItem>
+              <Button large
+                onPress = {() => this.props.navigation.navigate('MapScreen',{categories: this.state.categories})}
+              >
+              <Text>Start Fishing!</Text>
+            </Button>
+            </Card>
+          }
+        />
         </View>
       </Container>
     );
