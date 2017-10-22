@@ -28,7 +28,7 @@ export default class AugmentedScreen extends React.Component {
     let obj = this;
     setTimeout(
       () => { this.props.navigation.navigate('WinScreen')},
-      1000
+      10000
     );
 
     RNShakeEvent.addEventListener('shake', () => {
