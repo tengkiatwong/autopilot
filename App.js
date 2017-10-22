@@ -1,7 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { location } from 'expo';
 import { StackNavigator } from 'react-navigation';
+
+import MapScreen from './MapScreen.js'
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -12,25 +14,26 @@ class HomeScreen extends React.Component {
         <View>
           <Text style={styles.headerText}>What are you looking for today?</Text>
         </View>
-        <View style={styles.card}>
+        <TouchableOpacity style={styles.card}>
           <Text style={styles.cardText}>Dining</Text>
-        </View>
-        <View style={styles.card}>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.card} onPress={() => this.props.navigation.navigate("MapScreen")}>
           <Text style={styles.cardText}>SportsWear</Text>
-        </View>
-        <View style={styles.card}>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.card}>
           <Text style={styles.cardText}>Groceries</Text>
-        </View>
-        <View style={styles.card}>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.card}>
           <Text style={styles.cardText}>Watches</Text>
-        </View>
+        </TouchableOpacity>
 
       </View>);
   }
 }
 
 const AutoPilot = StackNavigator({
-  Home: { screen: HomeScreen }
+  Home: { screen: HomeScreen },
+  MapScreen: { screen: MapScreen},
 });
 
 export default class App extends React.Component {
