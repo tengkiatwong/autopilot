@@ -9,19 +9,43 @@ import './ReactotronConfig';
 import Reactotron from 'reactotron-react-native'
 
 export default class HomeScreen extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      item: {
+        title: "Carlo's Bake Shop",
+        code: "7TVXQ",
+        coupon: "20%",
+        couponCategory: "All Doughnuts"
+      }
+    }
+  }
+
   static navigationOptions = {
     header: null
   };
   render() {
     return (
       <View style={styles.container}>
-        <Text>sidjsidjisjdsid</Text>
+        <View style={styles.card}>
+
+        </View>
+        <View style={styles.fishCollection}>
+
+        </View>
       </View>);
   }
 }
 
 
 const styles = StyleSheet.create({
+  card: {
+
+  },
+  fishCollection: {
+
+  }
   container: {
     flex: 1,
     backgroundColor: '#fff',
