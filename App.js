@@ -66,7 +66,8 @@ class HomeScreen extends React.Component {
 const AutoPilot = StackNavigator({
   HookScreen: {screen: HookScreen},
   MapScreen: { screen: MapScreen},
-  AugmentedScreen: {screen: AugmentedScreen}
+  AugmentedScreen: {screen: AugmentedScreen},
+  WinScreen: {screen: WinScreen}
 });
 
 export default class App extends React.Component {
